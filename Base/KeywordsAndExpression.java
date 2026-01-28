@@ -55,7 +55,7 @@ public class KeywordsAndExpression {
         return finalScore;
     }
     /* ch50 */
-    /* ch51 */
-    /* ch52 */
 
+    // 不支援預設值：Java 與許多語言不同，不支援在參數中設定預設值
+    // 輸入 psvm 並按 Enter 即可快速生成方法
 }
