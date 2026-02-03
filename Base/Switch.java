@@ -28,6 +28,18 @@ package Base;
 
 public class Switch {
     public static void main(String[] args) {
+        printDayofWeek((0));
+        // enchanded statement
+        int switchValue1 = 2;
+
+        switch (switchValue1) {
+            case 1 -> System.out.println("Value was1");
+            case 2 -> System.out.println("Value was 2");
+            case 3, 4, 5 -> System.out.println("Value was 3, 4, or 5");
+            default -> System.out.println("Was not 1, 2, 3, 4, or 5");
+        }
+
+        // traditional statement
         int switchValue = 1;
 
         switch (switchValue) {
@@ -36,13 +48,71 @@ public class Switch {
                 break;
             case 2:
                 System.out.println("Value was 2");
-            case 3: case 4: case 5:
+            case 3:
+            case 4:
+            case 5:
                 System.out.println("Value was 3, 4, or 5");
                 break;
             default:
                 System.out.println("Was not 1, 2, 3, 4, or 5");
                 break;
         }
+    }
 
+    public static String getQuater(String month) {
+        // return 出現在 switch 前面 , 在 JDK 14 正式成為標準
+        return switch (month) {
+            case "January", "February", "March" -> {
+                yield "1st quarter";
+            }
+            case "April", "May", "June" -> "2nd quarter";
+            case "July", "August", "September" -> "3rd quarter";
+            case "October", "November", "December" -> "4th quarter";
+            default -> {
+                String badResponse = month + "is bad";
+                yield badResponse;
+            }
+        };
+
+        /*
+         * traditional statement
+         * 
+         * 沒有用 break，而是用 return。
+         * return 會直接離開 switch 同時離開方法，所以也不會 fall through
+         * 
+         * switch (month) {
+         * case "January":
+         * case "February":
+         * case "March":
+         * return "1st quarter";
+         * 
+         * case "April":
+         * case "May":
+         * case "June":
+         * return "2nd quarter";
+         * 
+         * case "July":
+         * case "August":
+         * case "September":
+         * return "3rd quarter";
+         * 
+         * case "October":
+         * case "November":
+         * case "December":
+         * return "4th quarter";
+         * }
+         * return "Invalid month";
+         * 
+         */
+    }
+
+    public static void printDayofWeek(int day) {
+        String dayOfWeek = switch(day){
+            case 0 -> "Sunday";
+            case 1 -> "Monday";
+            case 2 -> "Tuseday";
+            default -> "Invalid Day";
+        };
+        System.out.println(dayOfWeek);
     }
 }
