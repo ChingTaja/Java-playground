@@ -1,4 +1,5 @@
 package Base;
+
 public class Loop {
     public static void main(String[] args) {
         for (int counter = 1; counter <= 5; counter++) {
@@ -18,9 +19,34 @@ public class Loop {
 
             System.out.println(i);
         }
+
+        int count = 0;
+        for (int i = 10; count < 3 && i < 50; i++) {
+            if (isPrime(i)) {
+                System.out.println(("number" + i));
+                count++;
+
+                // if(count == 3) {
+                //     System.out.println("break loop");
+                //     break;
+                // }
+            }
+        }
     }
 
     public static double calculateInterest(double amount, double interestRest) {
         return (amount * (interestRest / 100));
+    }
+
+    public static boolean isPrime(int wholeNumber) {
+        if (wholeNumber <= 2) {
+            return (wholeNumber == 2);
+        }
+        for (int divisor = 2; divisor < wholeNumber; divisor++) {
+            if (wholeNumber % divisor == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
