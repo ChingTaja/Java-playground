@@ -27,11 +27,37 @@ public class Loop {
                 count++;
 
                 // if(count == 3) {
-                //     System.out.println("break loop");
-                //     break;
+                // System.out.println("break loop");
+                // break;
                 // }
             }
         }
+
+        // while
+        int j = 1;
+        while (j <= 5) {
+            System.out.println(j);
+            j++;
+        }
+
+        // continue(跳過這個 loop 進入下一個 loop)
+        int number = 0;
+        while ( number < 50) {
+            number += 5;
+            if (number % 25 == 0) {
+                continue;}
+            System.out.print(number + "_");
+        }
+
+        // do while (至少執行一次)
+        int k = 1;
+        boolean isReady = false;
+        do {
+            if (k > 5) {
+                break;
+            }
+            System.out.println(k);
+        } while (isReady);
     }
 
     public static double calculateInterest(double amount, double interestRest) {
