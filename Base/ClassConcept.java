@@ -19,7 +19,6 @@ object 則是填好的表單
 物件也被稱為某個類別的實例（instance）
 */
 
-
 /*
 
 -  類別中建立欄位（field）有兩種方式
@@ -67,5 +66,20 @@ Static Method（靜態方法） &  Instance Method（實例方法） 差異
 
 */
 public class ClassConcept {
+    public static void main(String[] args) {
+        int currentYear = 2022;
+        String stringCurrentYear = "2022";
+        String userDateOfBirth = "1999";
+        
+        // 使用 Wrapper Class 來 parse 把字串轉成數字
+        // Integer 是 Class
+        // parseInt 是 Integer 的 static method
+        int dateOfBirth = Integer.parseInt((userDateOfBirth));
+        
 
+        // System.out.println(currentYear - userDateOfBirth); // ❌ 編譯錯誤
+        System.out.println(stringCurrentYear + userDateOfBirth); // 成功但結果是 "20221999"
+        
+        System.out.println(currentYear + dateOfBirth);
+    }
 }
