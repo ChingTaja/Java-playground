@@ -2,9 +2,11 @@ package Base;
 
 public class Basic {
     public static void main(String[] args) {
-        System.out.print("Hi");
+        Car car = new Car(); // 告一個型別為 Car 的變數
 
-        int myFirstName = 5;
-        System.out.print(myFirstName);
+        // car.make = "Porsche"; // Error!
+        System.out.println("make =" + car.getColor()); 
+
+        car.describeCar(); // 0 door null, null, null
     }
 }
