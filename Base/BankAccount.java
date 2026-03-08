@@ -7,14 +7,26 @@ public class BankAccount {
     private String email;
     private String phoneNumber;
 
+    public BankAccount() {
+        this("1234", 123, " tajaja", "taja@gmail.com", "09xxxxx"); // must be first line !!
+    }
+
     // constructor 必須和 class 名稱完全一樣
     // 只要名字不一樣，Java 就會把它當成普通 method
-    public BankAccount(String accountNumber, double balance, String customerName, String customerEmail, String custmoerPhone) {
+    public BankAccount(String accountNumber, double balance, String customerName, String customerEmail,
+            String custmoerPhone) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.customerName = customerName;
         email = customerEmail;
         phoneNumber = custmoerPhone;
+    }
+    
+    public BankAccount(String customerName, String customerEmail, String customerPhone) {
+        this("11111", 1233, customerName, customerEmail, customerPhone);
+        this.customerName = customerName;
+        email = customerEmail;
+        phoneNumber = customerPhone;
     }
 
     public String getAccountNumber() {
