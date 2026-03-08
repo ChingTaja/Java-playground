@@ -7,6 +7,10 @@
 其他 instance 也會看到改變的結果
 
 用類別名稱而不是 instance reference 來存取靜態變數，這樣更清楚它是屬於類別的，而不是屬於實例的
+所以它沒有 this（沒有當前 instance）
+
+this 代表 當前物件（current instance）
+但在 static method 裡是不存在的
 
 ```java
 class Dod {
