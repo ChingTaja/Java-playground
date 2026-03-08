@@ -7,6 +7,16 @@ public class BankAccount {
     private String email;
     private String phoneNumber;
 
+    // constructor 必須和 class 名稱完全一樣
+    // 只要名字不一樣，Java 就會把它當成普通 method
+    public BankAccount(String accountNumber, double balance, String customerName, String customerEmail, String custmoerPhone) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.customerName = customerName;
+        email = customerEmail;
+        phoneNumber = custmoerPhone;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }
