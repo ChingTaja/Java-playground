@@ -14,9 +14,24 @@ public class Main {
                 case 5 -> name = "Lisa";
                 default -> name = "Anonymous";
             }
-            Student s = new Student(id, name, "1985-11-05", "Java Masterclass");
+            LAPStudent s = new LAPStudent(id, name, "1985-11-05", "Java Masterclass");
             System.out.println(s);
             // 每個物件傳給 println 時，如果該類別有實作 toString() 方法，Java 會自動執行它
         }
+        Student pojoStudent = new Student("W923006", "Ann", "5 November 1985", "Java Masterclass");
+        
+        LAPStudent recordStudent = new LAPStudent("S923007", "Bill", "5 November 1985", "Java Masterclass");
+        
+        System.out.println(pojoStudent);
+        System.out.println(recordStudent);
+
+        // record 不使用 get 前綴
+        // accessor 方法名稱直接使用元件名稱
+        System.out.println(pojoStudent.getName() + " is taking " + pojoStudent.getClassList());
+        System.out.println(recordStudent.name() + " is taking " + recordStudent.classList());
+
+        pojoStudent.setClassList(pojoStudent.getClassList() + ", Java OCP Exam 829");
+        
+        // recordStudent.setClassList(recordStudent.classList() + ", Java OCP Exam 829"); //!! 錯誤
     }
 }
