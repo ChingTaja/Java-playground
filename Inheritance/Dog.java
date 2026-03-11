@@ -37,14 +37,14 @@ public class Dog extends Animal {
                 ", tailShape=" + tailShape;
     }
         
-    // 完全替換 (Complete Override)
+    // 1. 完全替換 (Complete Override)
     // 父類的行為被完全捨棄，改用子類定義的行為
     @Override
     public void makeNoise() {
 
     }
 
-    // 直接繼承 (Redundant Override / Default)
+    // 2. 直接繼承 (Redundant Override / Default)
     
     //雖然在最終效果上是多餘的，但在以下幾種特殊情況下，可能會這樣做：
     // 1. 為了以後擴充： 先把架構搭好，打算以後再回來加代碼
@@ -55,7 +55,7 @@ public class Dog extends Animal {
         super.move(speed);
     }
     
-    // 功能擴充 (Extension)
+    // 3. 功能擴充 (Extension)
     // 既保留父類的基礎，又增加子類的特色()
     // 先呼叫 super.method() 接著再寫子類專屬的程式碼
     /* 
