@@ -41,7 +41,15 @@ public class Dog extends Animal {
     // 父類的行為被完全捨棄，改用子類定義的行為
     @Override
     public void makeNoise() {
+        // 子 class 無法讀取 母 class 的 private 屬性
+        // 1. 不同 package 的子 class 可以讀取 母 class 的 protected 屬性(conditional encapsulation)
+        // 2. protected 同一個 package 的 class都可以存取它
 
+        if (type == "Wolf") {
+            System.out.print("Ow Wooo!");
+        }
+        bark();
+        System.out.println();
     }
 
     // 2. 直接繼承 (Redundant Override / Default)
@@ -53,6 +61,14 @@ public class Dog extends Animal {
     @Override
     public void move(String speed) {
         super.move(speed);
+        if (speed == "slow") {
+            walk();
+            wagTail();
+        } else {
+            run();
+            bark();
+        }
+        System.out.println();
     }
     
     // 3. 功能擴充 (Extension)
@@ -66,4 +82,19 @@ public class Dog extends Animal {
     }
     */
     
+    private void bark() {
+        System.out.println("Woof!");
+    }
+
+    private void run() {
+        System.out.println("Dog Running ");
+    }
+    
+    private void walk() {
+        System.out.println("Dog wakling ");
+    }
+    
+    private void wagTail() {
+        System.out.println("Tail Wagging ");
+    }
 }
