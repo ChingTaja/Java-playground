@@ -1,4 +1,4 @@
-package Inheritance;
+package StringExample;
 
 public class StringMethod2 {
 
