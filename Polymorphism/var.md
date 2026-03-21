@@ -1,0 +1,1 @@
+`var` 是 Java 中一個特殊的「**contextual keyword**」 我們是在告訴 Java 在「編譯時期」幫我們推斷出型別
