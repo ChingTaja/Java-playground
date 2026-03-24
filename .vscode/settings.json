@@ -1,0 +1,16 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#a8689d",
+        "titleBar.activeBackground": "#0a302a",
+        "titleBar.activeForeground": "#347373",
+        "titleBar.inactiveBackground": "#3F243B",
+        "titleBar.inactiveForeground": "#FCF9FB",
+        "statusBar.background": "#3F243B",
+        "statusBar.foreground": "#FCF9FB",
+        "statusBar.debuggingBackground": "#3F243B",
+        "statusBar.debuggingForeground": "#FCF9FB",
+        "statusBar.noFolderBackground": "#3F243B",
+        "statusBar.noFolderForeground": "#FCF9FB"
+    },
+    "java.dependency.packagePresentation": "hierarchical"
+}

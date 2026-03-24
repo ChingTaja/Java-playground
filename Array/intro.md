@@ -10,3 +10,7 @@ it's still a class.
 int [ ] intergerArray --> more common
 String courseList[]
 ```
+
+對於基本型別，任何數字類型的預設值都是 0（例如 int、double 或 short）
+對於布林值（boolean），預設值則是 false
+而對於任何類別型別（Class type），元素則會被初始化為 null

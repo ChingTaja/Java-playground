@@ -1,5 +1,7 @@
 package Array.dev.lpa;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         // 一旦陣列實例化之後，你就無法改變陣列的大小
@@ -19,9 +21,27 @@ public class Main {
         System.out.println("last" + firstTen[arrayLength -1]);
 
         int[] newArray;
-        newArray = new int[] { 5, 4, 3, 2, 1 };
+        // newArray = new int[] { 5, 4, 3, 2, 1 };
+        newArray = new int[5];
         for (int i = 0; i < newArray.length; i++) {
             System.out.println(newArray[i] + " ");
         }
+
+        for (int element : newArray) {
+            System.out.println(element + " ");
+        }
+        System.out.println(newArray); // [I@@214c265e --> 非預期的數字
+        System.out.println(Arrays.toString(newArray));
+        // [5, 4, 3, 2, 1]
+
+        Object objectVariable = newArray;
+        if (objectVariable instanceof int[]) {
+            System.out.println("objectVariable is really an int array");
+        }
+
+        Object[] objectArray = new Object[3];
+        objectArray[0] = "Hello";
+        objectArray[1] = new StringBuilder("world");
+        objectArray[2] = newArray; // nested array
     }
 }
