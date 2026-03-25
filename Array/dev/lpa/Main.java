@@ -1,6 +1,7 @@
 package Array.dev.lpa;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class Main {
         System.out.println("first = " + firstTen[0]);
         int arrayLength = firstTen.length;
         System.out.println("length of array" + arrayLength);
-        System.out.println("last" + firstTen[arrayLength -1]);
+        System.out.println("last" + firstTen[arrayLength - 1]);
 
         int[] newArray;
         // newArray = new int[] { 5, 4, 3, 2, 1 };
@@ -43,5 +44,40 @@ public class Main {
         objectArray[0] = "Hello";
         objectArray[1] = new StringBuilder("world");
         objectArray[2] = newArray; // nested array
+
+        // -----
+        int[] firstArray = getRandomArray(10);
+        System.out.println(Arrays.toString(firstArray));
+        Arrays.sort(firstArray);
+        System.out.println(Arrays.toString(firstArray));
+
+        int[] secondArrray = new int[10];
+        System.out.println(Arrays.toString(secondArrray));
+        Arrays.fill(secondArrray, 5);
+        System.out.println(Arrays.toString(secondArrray));
+
+        int[] thirdArray = getRandomArray(10);
+        System.out.println(Arrays.toString(thirdArray));
+
+
+        int[] fourthArray = Arrays.copyOf(thirdArray, thirdArray.length);
+        System.out.println(Arrays.toString(fourthArray));
+
+        Arrays.sort(fourthArray);
+        System.out.println(Arrays.toString(thirdArray));
+        System.out.println(Arrays.toString(fourthArray)); // 不影響原陣列
+
+
     }
-}
+    
+    public static int[] getRandomArray(int len) {
+        Random random = new Random();
+        int[] newInt = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            newInt[i] = random.nextInt(100); // 回傳 0 到 99 之間的隨機整數
+        }
+
+        return newInt;
+    }
+ }
