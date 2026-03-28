@@ -67,6 +67,22 @@ public class Main {
         System.out.println(Arrays.toString(thirdArray));
         System.out.println(Arrays.toString(fourthArray)); // 不影響原陣列
 
+        String[] sArray = { "Able", "Jane" };
+        Arrays.sort(sArray);
+
+        if (Arrays.binarySearch(sArray, "Taja") >= 0) {
+            System.out.println("Found Mark in the list ");
+        }
+
+        int[] s1 = { 1, 2, 3, 4, 5 };
+        int[] s2 = { 1, 2, 3, 4, 5 };
+
+        // 同位置 , 同數值 , 同長度
+        if (Arrays.equals(s1, s2)) {
+            System.out.println("Arrays are equal");
+        } else {
+            System.out.println("Arrays are not equal");
+        }            
 
     }
     
