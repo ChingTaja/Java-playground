@@ -3,7 +3,7 @@ package Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ChallengeMinValue {
+public class ChallengeArray {
 
     public static void main(String[] args) {
 
@@ -12,6 +12,10 @@ public class ChallengeMinValue {
 
         int returnedMin = findMin(returnedArray);
         System.out.println("min = " + returnedMin);
+
+        reverse(returnedArray);
+
+        int[] reverseCopy = reverseCopy(returnedArray);
     }
 
     private static int[] readIntegers() {
@@ -39,5 +43,32 @@ public class ChallengeMinValue {
         }
 
         return min;
+    }
+
+    // 影響原陣列
+    // 只需要跑到一半 (halfLength)
+    private static void reverse(int[] array) {
+
+        int maxIndex = array.length - 1;
+        int halfLength = array.length / 2;
+
+        for (int i = 0; i < halfLength; i++) {
+            int temp = array[i];
+            array[i] = array[maxIndex - i];
+            array[maxIndex - i] = temp;
+            System.out.println("--> " + Arrays.toString(array));
+        }
+    }
+
+    // 防止動到原陣列
+    private static int[] reverseCopy(int[] array) {
+
+        int[] reversedArray = new int[array.length];
+        int maxIndex = array.length - 1;
+        for (int el : array) {
+            reversedArray[maxIndex--] = el;
+        }
+
+        return reversedArray;
     }
 }
