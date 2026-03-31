@@ -61,7 +61,7 @@ public class twoDimensional {
         // 【危險區】嘗試將元素強制轉型為 Object[] 並用 deepToString 印出
         // 當跑完前兩格（陣列）沒事，但跑到第三格 "Hello" 時：
         // 會拋出 ClassCastException，因為 String 無法強制轉型為 Object[]
-        for (Object element : anyArray) {
+        for (Object element : anyArray) { // Java 說：保證這個是個陣列
             System.out.println("Element type = " + element.getClass().getSimpleName());
             System.out.println("Element toString() = " + element);
             System.out.println(Arrays.deepToString((Object[]) element));
