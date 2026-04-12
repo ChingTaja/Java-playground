@@ -52,3 +52,41 @@ next() → 直接指向下一個節點，不用重頭數
 效能：O(n) ✅
 
 比喻：導遊帶你一路走下去，不需要回頭
+
+
+# iterator v.s listIterator
+
+1. 移動方向
+
+- Iterator: 
+只能`單向移動 , 只能從頭走到尾`
+一旦跨過某個元素，就再也回不去了（除非重新建立一個 Iterator）
+
+- ListIterator: 可以雙向移動。
+
+透過 next() 往後走
+
+透過 previous() 往回走
+這對 LinkedList（雙向鏈結）來說非常自然且高效
+
+2. 修改權限
+
+- Iterator: 只能執行 刪除 (remove)
+
+- ListIterator: 可以執行 刪除 (remove)、修改 (set)、以及 新增 (add)
+
+這就是為什麼你能在遍歷 LinkedList 時，安全地修改清單內容
+
+3. 索引獲取 (Indexing)
+
+- Iterator: 它不知道自己在哪裡，它只知道「後面還有沒有人」
+
+- ListIterator: 它可以告訴你目前游標位置的索引
+ - nextIndex()：回傳下一個元素的索引
+ - previousIndex()：回傳前一個元素的索引
+
+4. 適用範圍
+
+- Iterator: 適用於 所有集合（Collection）。包括 Set、List、甚至 Queue 的部分實作。
+
+- ListIterator: 僅適用於 List 介面的實作類別。因為只有 List 才有明確的「索引」與「順序」概念。

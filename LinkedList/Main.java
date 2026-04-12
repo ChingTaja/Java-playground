@@ -122,20 +122,32 @@ public class Main {
 
     private static void testIterator(LinkedList<String> list) {
 
-        var iterator = list.listIterator();
+        var iterator = list.listIterator(); // 游標落在第一個元素 之前
         while (iterator.hasNext()) {
-//            System.out.println(iterator.next());
+            // System.out.println(iterator.next());
+
             if (iterator.next().equals("Brisbane")) {
+                // list.remove(); ==> 會報錯 , Java 為了防止在多執行緒或複雜遍歷中出現數據毀損（Fail-fast mechanism）的一種保護機制
+
                 iterator.add("Lake Wivenhoe");
             }
-        }
+        } // 
         while (iterator.hasPrevious()) {
+            // cursor（📍） 會往回（向左）跨過前一個元素
+            // 回傳剛才被跨過的那個元素
+
+            // corsor 永遠會在 element
+            // e.g:  ["1", "2", "3"]
+            // 1 ["1", "2", "3"] 📍
+            // 2 ["1", "2"] 📍 ["3"]
+            // 3 📍 ["1", "2", "3"]
             System.out.println(iterator.previous());
         }
 
         System.out.println(list);
 
         var iterator2 = list.listIterator(3);
+        // 游標（Cursor）永遠落在兩個元素中間 e.g 位置 0：在第一個 element「之前」，不是指向第一個
         System.out.println(iterator2.previous());
 
     }
