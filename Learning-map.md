@@ -17,5 +17,4 @@
 
 # 11
 - Abstraction
-
 - Generalization
