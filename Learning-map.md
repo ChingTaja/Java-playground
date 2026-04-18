@@ -18,3 +18,4 @@
 # 11
 - Abstraction
 - Generalization
+- Interface
