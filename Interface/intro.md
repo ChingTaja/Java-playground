@@ -119,3 +119,43 @@ interface Logger {
 重點：
 private 方法只能在 interface 內部用
 不能被實作類別看到
+
+# 介面中宣告的欄位
+
+不是一般的 instance 變數
+
+它們會被自動視為 **public static final**
+
+介面只支援 public、static 和 final 的欄位
+
+也就是說，它們其實是「常數（constants）」
+```java
+interface FlightEnabled {
+    double MILES_TO_KM = 1.609;
+    double KM_TO_MILES = 0.621;
+}
+```
+
+# final
+當我們使用 final 修飾詞時，就代表這個東西之後不能再被修改。
+
+final method：不能被子類別覆寫（override）
+final field：物件建立後，欄位的值不能再改
+final static field：類別層級的常數，初始化後不能再改
+final class：不能被繼承（不能被 extends）
+區塊中的 final variable：一旦被賦值後，在該區塊內不能再改
+final method parameter：方法內不能重新賦值給這個參數
+
+# 介面不能「實作（implement）」另一個介面
+
+# 抽象化
+
+寫程式時，不要直接依賴「某個具體類別」，而是依賴「介面（能力）」
+
+舉例：
+不要寫死「這就是 Bird」
+要寫成「只要會飛的東西就可以」
+
+# JDK8 新增 default 方法 和 public static 方法
+
+JDK 8 前 只能 abstract method

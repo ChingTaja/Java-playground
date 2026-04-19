@@ -19,3 +19,4 @@
 - Abstraction
 - Generalization
 - Interface
+ - default method & override
