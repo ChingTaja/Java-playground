@@ -20,3 +20,4 @@
 - Generalization
 - Interface
  - default method & override
+ - abstract class v.s interface
