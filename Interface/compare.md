@@ -97,3 +97,41 @@ decoupling
 - 只想定義「行為」
 - 想要彈性 + 可替換
 - 想做解耦 / 架構設計
+
+# 核心差異
+
+✅ interface（介面）
+定義「這個東西能做什麼」
+比較像「規則 / 合約」
+
+
+```java
+interface Mappable {
+    void render();
+}
+```
+
+只定義方法（以前）
+Java 8 之後可以有：
+default 方法
+static 方法
+不能有 instance state（欄位）
+
+✅ abstract class（抽象類別）
+
+定義「這個東西是什麼 + 部分實作」
+比較像「半完成的類別」
+
+```java
+abstract class Line {
+    double[][] locations;
+
+    abstract void render();
+}
+```
+
+可以有：
+欄位（state）
+建構子
+已實作的方法
+抽象方法

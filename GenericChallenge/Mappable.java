@@ -6,7 +6,7 @@ public interface Mappable {
     void render();
 
     // 在 Java 8 之後：  介面可以有 static 方法
-    static double[] StringToLoaction(String location) {
+    static double[] stringToLatLon(String location) {
         var split = location.split(",");
         double lat = Double.valueOf(split[0]);
         double lng = Double.valueOf(split[1]);
@@ -18,7 +18,9 @@ public interface Mappable {
 abstract class Point implements Mappable {
     private double[] location = new double[2];
 
-    
+    public Point(String location) {
+        this.location = Mappable.stringToLatLon(location);
+    }
 
     @Override
     public void render() {
@@ -44,7 +46,7 @@ abstract class Line implements Mappable {
         this.locations = new double[locations.length][];
         int index = 0;
         for (var l : locations) {
-            this.locations[index++] = Mappable.StringToLoaction(l);
+            this.locations[index++] = Mappable.stringToLatLon(l);
         }
     }
 
