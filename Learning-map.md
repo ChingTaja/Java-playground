@@ -21,3 +21,8 @@
 - Interface
  - default method & override
  - abstract class v.s interface
+
+# 12
+- Generics
+ - bounds
+ - comparable & comparator

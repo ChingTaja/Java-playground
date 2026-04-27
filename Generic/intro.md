@@ -86,3 +86,21 @@ class Team<T extends Player> {
 ```
 
 因為編譯器知道：T 一定是 Player！
+
+📌 Java 物件比較：Comparable vs. Comparator
+1. Comparable 介面 (自然排序)
+核心方法：compareTo(T o)
+呼叫方式：由物件實例本身呼叫，與另一個物件進行比較
+限制：類別必須實作（implement）Comparable 介面
+最佳實踐：若 equals(Object o) 為 true，則 compareTo 應回傳 0（確保自然排序與相等性定義一致）
+
+2. Comparator 介面 (外部比較器)
+核心方法：compare(T o1, T o2)
+呼叫方式：傳入兩個同類型的物件進行比較
+優點：
+被比較的物件不需要實作 Comparator 介面
+更具彈性，可定義多種不同的排序規則（例如：按姓名排、按年齡排）
+
+3. Arrays.sort 的用法
+單一參數 Arrays.sort(array)：陣列元素必須實作 Comparable，否則會噴錯誤
+雙參數 Arrays.sort(array, comparator)：**不要求元素實作 Comparable**，會直接根據傳入的 Comparator 規則排序
