@@ -26,3 +26,5 @@
 - Generics
  - bounds
  - comparable & comparator
+ - Type Erasure
+ - wildcard

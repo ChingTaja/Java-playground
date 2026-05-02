@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Main {
 
-
     /*
     你會這樣想：
     LPAStudent 是 Student ✅
@@ -47,7 +46,7 @@ public class Main {
     */
 
     /*
-
+    
     當作為「參考型別（reference types）」使用時：
     
     一個容器（container）裝某種類型，和另一個裝不同類型的容器之間，沒有任何關係
@@ -62,24 +61,53 @@ public class Main {
             students.add(new Student());
         }
         students.add(new LPAStudent());
-        printList(students);
+        // printList(students);
+        printMoreLists(students);
 
         List<LPAStudent> lpaStudents = new ArrayList<>();
         for (int i = 0; i < studentCount; i++) {
             lpaStudents.add(new LPAStudent());
         }
-        printList(lpaStudents);
+        // printList(lpaStudents);
+        printMoreLists(lpaStudents);
     }
 
     // warning:  List is a raw type. References to generic type List<E> should be parameterized
     //
-    
+
     // public static void printList(List students) {
-    public static void printList(List students) {
+
+    //     for (var student : students) {
+    //         System.out.println(student);
+    //     }
+    //     System.out.println();
+    // }
+
+    // public static <T extends Student> void printMoreLists(List<T> students) {
+
+    //     for (var student : students) {
+    //         System.out.println(student);
+    //     }
+    //     System.out.println();
+    // }
+
+
+    public static void printMoreLists(List<? extends Student> students) {
 
         for (var student : students) {
             System.out.println(student);
         }
         System.out.println();
     }
+
+    
+    // 你以為可以 overload，但其實不行
+    // Type Erasure : Java 編譯後會「把泛型拿掉」(泛型只存在於編譯期，執行時會被擦掉)
+    // public static void testList(List<String> list) {
+
+    // }
+
+    // public static void testList(List<Integer> list) {
+        
+    // }
 }
