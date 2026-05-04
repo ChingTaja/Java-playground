@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 public class Employee {
 
+    // 🟢 static nested class
     public static class EmployeeComparator <T extends Employee>
             implements Comparator<Employee> {
 
