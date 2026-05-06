@@ -28,3 +28,6 @@
  - comparable & comparator
  - Type Erasure
  - wildcard
+
+# 14
+- Lambda
