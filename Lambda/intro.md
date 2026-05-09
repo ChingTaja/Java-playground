@@ -222,3 +222,55 @@ Java 會自動： Auto Boxing & Auto Unboxing
 ✔ 不是傳「結果」
 ✔ 也不是傳「固定方法」
 ✔ 而是傳「運算規則」
+
+# Lambda  參數規則
+| 形式  | 寫法                      |
+| --- | ----------------------- |
+| 無參數 | () -> value             |
+| 單參數 | x -> value              |
+| 多參數 | (x, y) -> value         |
+| 有型別 | (int x) -> value        |
+| var | (var x) -> value（需全部一致） |
+
+1️⃣ 無參數（None）
+```java
+() -> statement
+```
+
+✔ 規則：
+一定要有 ()
+不能省略括號
+
+2️⃣ 單一參數（One parameter）
+```java
+s -> statement // 可以省略括號（最常見）
+(s) -> statement  // 也可以加括號（合法但多餘）
+(var s) -> statement // 可以用 var
+(String s) -> statement // 可以指定型別
+```
+
+⚠️ 重點規則
+
+👉 只有「單一參數」時才能省略括號
+
+3️⃣ 多參數（Two or more）
+```java
+(s, t) -> statement
+(var s, var t) -> statement
+(String s, List t) -> statement
+```
+✔ 規則整理：
+
+一定要有括號 ()
+⚠️ 一致性規則（很重要）
+
+👉 如果有「型別 / var」，每個參數都要一致
+
+❌ 錯誤寫法
+(var s, t) -> statement   // ❌ 錯
+(String s, var t) -> statement // ❌ 錯
+
+✅ 正確寫法
+(var s, var t) -> statement
+(String s, String t) -> statement
+(s, t) -> statement

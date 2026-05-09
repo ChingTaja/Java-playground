@@ -35,6 +35,8 @@
  - functional interface
   - Consumer / Biconsumer
   - Predicate / BiPredicate
+  - Function 
+  - Supplier
 
 
 functional programming
