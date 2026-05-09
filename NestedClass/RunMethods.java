@@ -42,6 +42,26 @@ public class RunMethods {
         var c3 = new NameSort<StoreEmployee>();
 
         // Using anonymous class
+        // 直接 new 一個 class
+        // Comparator 不是你創的 class
+
+        /*
+         * 
+         * new 後面寫的
+         * 
+         * interface -> 我「實作」它
+         * class -> 我「繼承」它
+         */
+        
+        /*
+         * // Java 偷偷幫你做 (Comparator 是 interface)
+         * class Anonymous implements Comparator {
+         * ...
+         * }
+         * 
+         * // 你其實在做這個
+         * new Anonymous();
+         */
         var c4 = new Comparator<StoreEmployee>() {
             @Override
             public int compare(StoreEmployee o1, StoreEmployee o2) {
@@ -54,6 +74,23 @@ public class RunMethods {
         sortIt(storeEmployees, c2);
         sortIt(storeEmployees, c3);
         sortIt(storeEmployees, c4);
+        /*
+         * 匿名 class 直接當參數
+         * 
+         */
+        
+        /*
+         * sortIt(storeEmployees, new Comparator<StoreEmployee>() {
+         * 
+         * @Override
+         * public int compare(StoreEmployee o1, StoreEmployee o2) {
+         * return o1.getName().compareTo(o2.getName());
+         * }
+         * });
+         * 
+         */
+
+        // lambda
         sortIt(storeEmployees, (o1, o2) -> o1.getName().compareTo(o2.getName()));
     }
 
@@ -68,3 +105,5 @@ public class RunMethods {
     }
 
 }
+
+// 編譯後 JVM 會用 $ 表示 nested class

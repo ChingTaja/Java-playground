@@ -129,9 +129,18 @@ SAM = 單一抽象方法
 
 
 #### Lambda 為什麼 Java 能推斷參數與回傳值？
+
+方法「長什麼樣子」
+
 因為 functional interface 已經「定義好方法長相」
 - 參數是什麼
 - 回傳型別是什麼
+
+# Java 用 method signature 來「辨識方法」
+
+method signature = 方法名稱 + 參數型別（順序也重要）
+❌ 不包含回傳型別、參數名稱
+
 
 #### Functional Interface 是 Lambda 的 target type
 Lambda 不能單獨存在
@@ -152,3 +161,64 @@ Comparator 就是 functional interface，Lambda 是它的實作
     
 ✔ Functional Interface 條件
 只能有 1 個 abstract method（包含繼承來的）
+
+# 多參數 Lambda 要加括號
+
+正確：
+```java
+(a, b) -> a + b
+```
+錯誤：
+```java
+a, b -> a + b
+```
+
+# var 不能混用
+
+正確：
+
+```java
+(var a, var b) -> a + b
+```
+
+錯誤：
+
+```java
+(Integer a, Integer b) -> a + b
+```
+
+# Generic 不支援 Primitive Type
+
+Generic = 只支援 Reference Type（物件）
+
+正確寫法
+```java
+List<Integer> list = new ArrayList<>();
+List<Double> list2 = new ArrayList<>();
+```
+
+為什麼不能用 primitive？
+
+因為：
+Generic 是「編譯時型別機制」
+JVM 需要「Object 型別」來處理
+
+Java 會自動： Auto Boxing & Auto Unboxing
+
+# Lambda 的強項
+
+可以把：
+
+「行為（Behavior）」當參數傳入 ==> 函數式程式設計（Functional Programming）
+
+例如下面的 method：
+```java
+(a, b) -> a + b
+(a, b) -> a / b
+(a, b) -> a.toUpperCase() + b.toUpperCase()
+```
+因此：同一個方法 , 能執行完全不同邏輯
+    
+✔ 不是傳「結果」
+✔ 也不是傳「固定方法」
+✔ 而是傳「運算規則」

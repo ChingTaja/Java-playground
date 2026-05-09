@@ -1,7 +1,7 @@
 # 10
 - List & ArrayList
     - List.of & Arrays.asList(傳統做法)
-    - add / addAll 
+    - add / addAll
     - contains
     - remove / removeAll
     - retainAll
@@ -31,3 +31,8 @@
 
 # 14
 - Lambda
+ - deferred lambda expressions
+ - functional interface
+
+
+functional programming
