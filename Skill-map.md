@@ -33,6 +33,8 @@
 - Lambda
  - deferred lambda expressions
  - functional interface
+  - Consumer / Biconsumer
+  - Predicate / BiPredicate
 
 
 functional programming
