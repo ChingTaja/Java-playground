@@ -37,6 +37,6 @@
   - Predicate / BiPredicate
   - Function 
   - Supplier
-
+  - chaining
 
 functional programming
