@@ -1,14 +1,15 @@
 package FunctionalInterface;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public class MiniChallenge2 {
     public static void main(String[] args) {
 
         // 這個 method 在 functional world 是什麼？ (String) → (String)
-        // 有兩個選擇 
-        // ✔ 1️⃣ Function<String, String> 
+        // 有兩個選擇
+        // ✔ 1️⃣ Function<String, String>
         // T → R
         Function<String, String> everySecondChar = source -> {
             StringBuilder returnVal = new StringBuilder();
@@ -23,8 +24,7 @@ public class MiniChallenge2 {
         // 2️⃣ UnaryOperator<String>
         // 👉 特化版本（同型別）
         // T → T
-        UnaryOperator<String> everySecondCharOperator =
-        source -> {
+        UnaryOperator<String> everySecondCharOperator = source -> {
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < source.length(); i++) {
                 if (i % 2 == 1) {
@@ -32,10 +32,22 @@ public class MiniChallenge2 {
                 }
             }
             return result.toString();
-                };
-        
-            System.out.println(  everySecondChar.apply("1234567890"));
-    
+        };
+
+        System.out.println(everySecondChar.apply("1234567890"));
+
+        // 把「字串處理邏輯」當參數傳進 method
+        String result = everySecondCharacter(everySecondChar, "123456");
+
+        // 沒有參數 , 有回傳值
+        // lambdas represent deferred execution of snippets of code
+        Supplier<String> isLoveJava = () -> "I love Java";
+
+        Supplier<String> isLoveJav2 = () -> {
+            return "I love Java";
+        };
+
+        System.out.println(isLoveJava.get());
     }
 
     public static String everySecondChar(String source) {
@@ -57,12 +69,12 @@ public class MiniChallenge2 {
     // forEach removeIf
     // replaceAll
     // 這種現成 target
-   // 而是：自己寫一個 能接收 lambda的 method」
+    // 而是：自己寫一個 能接收 lambda的 method」
     public static String everySecondCharacter(Function<String, String> func, String source) {
 
         return func.apply(source);
     }
-    
+
     /*
      * creating a method that's a target for a lambda
      * 
