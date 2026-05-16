@@ -1,4 +1,22 @@
-集合框架中的 Set Operations ，探討如何利用 Set 介面的 Bulk Operations 來處理多個數據集之間的關聯性
+Set 本身並不具備隱含的順序（無序）雖然某些特定的 Set 實作類別是有序的
+Set **不包含重複的元素**
+Set 可能（最多）包含一個 `null` 元素
+
+
+### Set Method
+
+```java
+Set<String> emailSet = new HashSet<>();
+
+// 解決了動態添加與移除數據的需求
+emailSet.add("user@example.com");
+emailSet.remove("user@example.com");
+emailSet.clear(); // 清空整個集合
+
+// 註解：這些操作在 HashSet 中效率極高，通常在 O(1) 時間內完成。
+```
+
+# 集合框架中的 Set Operations ，探討如何利用 Set 介面的 Bulk Operations 來處理多個數據集之間的關聯性
 
 ### Union
 聯集運算將兩個集合的內容合併
