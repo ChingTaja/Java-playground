@@ -20,3 +20,7 @@ List.copyOf 和 Collections.nCopies 回傳的 List 通常是不可修改的
 | `List.copyOf()`     | 建立「不可變副本」 | ❌ 不可 | 產生唯讀 List |
 | `Collections.nCopies()` | 建立「固定內容視圖」  | ❌ 不可    | 重複同一元素    |
 | `Collections.copy()`    | 「覆蓋既有 List」 | ✔ 可（原 List） | 不產生新 List |
+
+
+👉 `Collections.copy()` = 塞進原本的 list（改舊的）  
+👉 `List.copyOf()` = 建立新的 list（但不能改）
