@@ -31,14 +31,38 @@ public class Main {
 
         System.out.println(robinHood);
 
-        // union
         Set<Contact> unionAB = new HashSet<>();
         unionAB.addAll(emailContacts);
         unionAB.addAll(phoneContacts);
+        printData("(A ∪ B) Union of emails (A) with phones (B)", unionAB);
 
-        System.out.println("----------------------------------------------");
-        System.out.println("Union Set");
-        System.out.println("----------------------------------------------");
+        Set<Contact> intersectAB = new HashSet<>(emailContacts);
+        intersectAB.retainAll(phoneContacts);
+        printData("(A ∩ B) Intersect emails (A) and phones (B)",
+                intersectAB);
+
+        Set<Contact> intersectBA = new HashSet<>(phoneContacts);
+        intersectBA.retainAll(emailContacts);
+        printData("(B ∩ A) Intersect phones (B) and emails (A)",
+                intersectBA);
+
+        Set<Contact> AMinusB = new HashSet<>(emailContacts);
+        AMinusB.removeAll(phoneContacts);
+        printData("(A - B) emails (A) - phones (B)",
+                AMinusB);
+
+        Set<Contact> BMinusA = new HashSet<>(phoneContacts);
+        BMinusA.removeAll(emailContacts);
+        printData("(B - A) phones (B) - emails (A)",
+                BMinusA);
+
+        Set<Contact> symmetricDiff = new HashSet<>(AMinusB);
+        symmetricDiff.addAll(BMinusA);
+        printData("Symmetric Difference: phones and emails", symmetricDiff);
+
+        Set<Contact> symmetricDiff2 = new HashSet<>(unionAB);
+        symmetricDiff2.removeAll(intersectAB);
+        printData("Symmetric Difference: phones and emails", symmetricDiff2);
 
         unionAB.forEach(System.out::println);
     }
