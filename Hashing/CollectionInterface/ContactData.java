@@ -1,4 +1,4 @@
-package Hashing.contact;
+package Hashing.CollectionInterface;
 
 import java.util.ArrayList;
 import java.util.List;

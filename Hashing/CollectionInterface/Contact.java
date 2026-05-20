@@ -1,4 +1,4 @@
-package Hashing.contact;
+package Hashing.CollectionInterface;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -45,6 +45,11 @@ public class Contact {
         this.name = other.name;
         this.emails = new HashSet<>(other.emails);
         this.phones = new HashSet<>(other.phones);
+    }
+
+    public String getNameLastFirst() {
+        return name.substring(name.indexOf(" ") + 1) + ", " +
+                name.substring(0, name.indexOf(" "));
     }
 
     public String getName() {
