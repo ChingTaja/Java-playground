@@ -1,0 +1,36 @@
+
+- `javap` 工具的基本定位與預設行為
+    
+    - `javap` 是 Java 內建的指令列工具，專門用來列出 `.class` 檔案中的類別成員，幫助開發者觀察編譯器暗中生成的隱式程式碼
+        
+    - 在預設情況下，`javap` 只會顯示 `public` 和 `protected` 的類別成員
+        
+- 關鍵參數 `-p` 的功能
+    
+    - 參數 `-p` 是 `-private` 的縮寫。
+        
+    - 加上此參數後，`javap` 會強制輸出類別中的**所有成員**，不論其存取修飾詞為何（包括 `private` 欄位與方法）。這在觀察內含大量隱式代碼的 record 和 enum 時非常實用。
+        
+- 執行 `javap` 的路徑與終端機細節
+    
+    - 在 IntelliJ 中編譯後的類別檔案會存放在專案目錄下的 `out` 資料夾內，並遵循對應的套件結構（package structure）。
+        
+    - 於終端機執行指令時，必須精確指定 `.class` 檔案的位置（專案名稱的大小寫須完全一致），且正斜線 `/` 在包含 Windows 在內的所有作業系統中皆通用。
+        
+- Record 經 `javap -p` 檢視後的隱式真面目
+    
+    - 透過工具可以清楚看見，編譯器為 Record 自動補齊了：
+        
+        1. `private final` 的欄位（如 `name`、`dob`）。
+            
+        2. 自訂建構子與隱式的標準建構子（canonical constructor）。
+            
+        3. `toString`、`hashCode` 與 `equals` 方法。
+            
+        4. 與欄位同名的存取子方法（accessor methods）。
+            
+- 環境變數 Path 的故障排除（主要是 Windows 系統）
+    
+    - 如果系統噴出找不到 `javap` 的錯誤，代表該執行檔所在的資料夾未納入系統 Path 中。
+        
+    - **解決方法**：需進入 Windows 設定的環境變數編輯介面，在 Path 中「新增」並「瀏覽」定位到當初安裝 JDK 底下的 **`bin` 子資料夾**。變更完成後需重啟 IDE（IntelliJ）以利路徑生效。
