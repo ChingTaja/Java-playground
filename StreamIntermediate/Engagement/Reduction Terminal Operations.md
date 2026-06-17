@@ -76,7 +76,8 @@ https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Co
 
 =================================================
 
-- Stream.generate() 的無參數 `Stream.generate()` 接收一個 `Supplier` 函數式介面作為參數
+- Stream.generate() 的無參數
+`Stream.generate()` 接收一個 `Supplier` 函數式介面作為參數
 其 Lambda 區塊沒有任何輸入參數（以空括號 `()` 表示）
 它能持續調用類別工廠方法來生成資料，搭配 `limit(n)` 中間操作可以精確固定化出指定規模的初始資料集
 
@@ -96,7 +97,8 @@ https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Co
   - Accumulator（累積器）：負責定義如何將串流中的單一元素逐一塞入、累積至該結果容器中
   - Combiner（組合器）：負責定義在多執行緒或平行串流運算時，如何將各個區塊（Buckets）各自累積出來的暫存容器，透過 `addAll` 的方式結合收攏成單一集合
 
-- TreeSet 元素自訂排序的異常防範 若要將元素收集至 `TreeSet` 中，該元素類別必須實作 `Comparable` 介面
+- TreeSet 元素自訂排序的異常防範 
+若要將元素收集至 `TreeSet` 中，該元素類別必須實作 `Comparable` 介面
 若類別本身未具備自然排序能力（例如未實作該介面的 `Student` 物件）
 則在自訂 `collect` 的 Supplier 時，無法直接使用 `TreeSet::new` 方法參考
 必須改寫為 Lambda 表達式並在構造函數中主動注入自訂的 `Comparator`，否則執行期將會拋出 Exception 崩潰
@@ -128,3 +130,35 @@ https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Co
   - **`collect()` 是「收集」**：水管後面接的是一個**大桶子（容器）**。流出來 100 個學生的資料，它就把這 100 個物件整整齊齊地疊進 List 或 Set 桶子裡
   - **`reduce()` 是「折疊 / 歸約」**：水管後面沒有桶子，只有一個**小熔爐（單一變數）**。流進來一個元素
   它就把這個元素跟目前的狀態「融合成一體」。例如把所有學生的年齡不斷相加，最後融合成一個「總年齡數字」
+
+============
+
+- Stream.iterate() 的無窮迴圈陷阱與 IntStream 替代方案
+    
+    - 使用三參數的 `Stream.iterate()` 時，第三個參數（遞增表達式）絕對不能使用後置遞增運算子（如 `s++`）。因為後置遞增會先回傳原本的值， Stream 不會用更新後的值，導致串流傳遞的值永遠被卡在初始狀態（例如永遠是 1），進而引發無窮迴圈（即使加了 `peek` 檢查也會發現印出來的全部都是 1）
+        
+    - 面對固定範圍的整數走訪，改用 `IntStream.rangeClosed(起始值, 結束值)` 搭配 `mapToObj` 的可讀性更高、語意更清晰，且能完全防止因遞增運算子不當操作所引發的技術風險
+        
+- 基礎型別串流（Primitive Streams）與 reduce() 的數值歸約
+	- 在 `DoubleStream`、`LongStream` 與 `IntStream` 的預設操作中，雖然官方已經提供了 `.sum()` 與 `.average()` 等便利的終端操作
+	- 但我們依舊可以透過 `.reduce(identity, BinaryOperator)` 函數來手動實作
+	- 此時傳入的 `0` 或 `0.0` 扮演著如同傳統迴圈中初始化累加變數（Total）的角色，逐步將流經的數值與當前總和疊加
+    
+- 集合容器的可變性（Mutability）對元素操作的物理限制 
+	- 透過 `Stream.toList()` 拿回的集合雖然是不可變的（Unmodifiable List），意即不允許我們在該 List 上進行結構性修改（如 `add()`、`remove()` 等變更集合長度的動作）
+	- 但**它完全不限制**去對 List 內部所儲存的物件實例（Element）進行內部屬性的修改（如呼叫 `s.addCourse(jgames)` 變更學生選課狀態）
+    
+- 自訂三參數 collect() 轉成 TreeSet 時的 Uniqueness 邏輯 Bug
+    
+    - 當我們將元素收集至自訂比較器（Comparator）的 `TreeSet` 容器時，`TreeSet` 內部**不僅會使用該比較器進行元素排序，還會完全依賴它來判斷資料的唯一性（Uniqueness）**
+        
+    - 如果只用「入學年份」作為排序依據（`longTermStudent`）
+    當多名學生入學年份相同時，`TreeSet` 在呼叫 `add` 時會判定兩者衝突（因為比較器回傳 0）
+    導致後續的學生資料被無情丟棄
+    因此，必須透過 `.thenComparing(Student::getStudentId)` 強制補上具備絕對唯一性的學號欄位進行複合比對
+    才能確保收集後的集合大小與原串流數量完全一致
+        
+- 依據業務場景決定是否省略收集容器（Avoid wasted collection over-head） 
+串流管道（Stream Pipeline）提供了極具彈性的終端選擇
+如果業務邏輯只是需要對最終篩選出的特定子集資料進行一次性的行為觸發（如直接列印學號或呼叫方法），則**完全不需要**在管道中插入 `.toList()` 或 `.collect()`
+- 直接在管線末端串接 `.forEach(...)` 來消費資料，不建立任何暫存集合容器，是最節省記憶體開銷與處理時間的最高效作法
