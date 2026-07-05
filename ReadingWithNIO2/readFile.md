@@ -88,9 +88,6 @@ Files.lines(path)
 - lazy execution（延遲執行）
 - 必須 close（try-with-resources）
 
-
-## 很重要
-
 ```java
 try (Stream<String> lines = Files.lines(path)) {}
 ```
@@ -172,7 +169,7 @@ Finance → 5HR → 4IT → 6
 |readAllLines|List<String>|逐行|
 |lines|Stream<String>|資料分析|
 
-# 8. 重要限制
+# 8. 限制
 
 這些方法：
 
@@ -208,7 +205,7 @@ Finance → 5HR → 4IT → 6
 上面那些建議用：
 
 - BufferedReader
-- Channel（下一章）
+- Channel
 
 | 方法           | 回傳     | 是否整檔載入  | 用途       |
 | ------------ | ------ | ------- | -------- |
