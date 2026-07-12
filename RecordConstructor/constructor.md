@@ -9,18 +9,133 @@ Record 它的核心目標是「用最少程式碼，包裝一份絕對不能被�
         
     - 若要顯式手動宣告它，必須確保所有 `final` 欄位都有被明確指派數值
         
+```java
+// 預設
+
+public record Person(String name, int age) {}
+
+// 等同於：
+
+public Person(String name, int age) {
+    this.name = name;
+    this.age = age;
+}
+
+// 如果你自己寫：
+
+public record Person(String name, int age) {
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+```
+
 - 自訂建構子（Custom Constructor）：
     
-    - 屬於多載（Overloaded）建構子（如講稿中的 Copy Constructor）
+    - 屬於多載（Overloaded）建構子（如範例中的 Copy Constructor）
+
+    - 用途: 建立不同參數的 constructor
         
     - 關鍵限制：自訂建構子的第一行敘述句，必須明確呼叫 `this(...)` 去委派給標準建構子
+
+
+```java
+錯誤：
+
+public record Person(String name, int age) {
+
+    public Person(String name) {
+        this.name = name;
+        this.age = 0;
+    }
+}
+
+// 會編譯錯。
+// 原因： record 不允許其他 constructor 直接設定欄位，所有物件建立流程最後一定要走到 canonical constructor，由它負責真正初始化欄位
+
+/* canonical constructor
+
+假設：
+
+public record Person(String name, int age) {
+}
+
+Java 會幫你產生：
+
+public Person(String name, int age) {
+    this.name = name;
+    this.age = age;
+}
+
+這就是 canonical constructor。
+
+
+*/
+
+// 正確：
+
+public record Person(String name, int age) {
+
+    public Person(String name) {
+        this(name, 0);
+    }
+}
+
+// 使用：
+
+Person p = new Person("Tom");
+
+System.out.println(p);
+```
         
 - 精簡建構子（Compact / Short Constructor）：
     
     - Record 專屬語法，外觀特徵是沒有小括號 `()`**（無參數列表描述）
         
-    - 它是宣告標準建構子的一種簡潔方式，專門用來處理資料的驗證（Validation）與轉換（Transformation），省去了老套的欄位指派代碼
+    - 它是宣告標準建構子的一種簡潔方式，專門用來處理資料的**驗證（Validation）與轉換（Transformation）**
+        省去了老套的欄位指派代碼
         
+
+```java
+public record Person(String name, int age) {
+
+    public Person {
+         if(age < 0) {
+            throw new IllegalArgumentException("Age invalid");
+        }
+
+        if(name == null) {
+            throw new IllegalArgumentException("Name required");
+        }
+    }
+}
+
+注意：
+
+沒有：
+
+(String name, int age)
+
+也沒有：
+
+this.name = name;
+this.age = age;
+
+編譯器會自動補上：
+
+等同於：
+
+public Person(String name, int age) {
+
+    // 你的驗證
+
+    this.name = name;
+    this.age = age;
+}
+```
 
 ### 2. 精簡建構子（Compact Constructor）的底層運作與鐵律
 
